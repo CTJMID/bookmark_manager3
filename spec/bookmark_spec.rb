@@ -28,7 +28,21 @@ describe Bookmark do
     expect(bookmark.id).to eq persisted_data['id']
     expect(bookmark.title).to eq 'Wikipedia'
     expect(bookmark.url).to eq 'www.wikipedia.org'
+    end
   end
-end
+
+  describe '#delete' do
+    it 'deletes a bookmark' do
+      bookmark1 = Bookmark.create(url: 'www.wikipedia.org', title: 'Wikipedia')
+      bookmark2 = Bookmark.create(url: 'www.myspace.com', title: 'MySpace')
+      
+      id = bookmark1.id
+      Bookmark.delete(id)
+
+      expect(Bookmark.all.length).to eq(1)
+
+    end
+  end
+
 
 end
